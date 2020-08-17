@@ -25,7 +25,29 @@ centroids = zeros(K, n);
 %
 % Note: You can use a for-loop over the centroids to compute this.
 %
-
+% for every centroid
+for k=1:K;
+	
+	% find the number of examples assigned to the current cluster
+	no_of_examples_in_cluster = sum(idx == k);
+	
+	% accumulate examples
+	examples_sum = zeros(1, n);
+	
+	% for every example
+	for i=1:m;
+		
+		% if the example belongs to the current centroid
+		if idx(i) == k;
+			examples_sum = examples_sum + X(i, :);
+		end;
+		
+	end;
+	
+	% update centroid
+	centroids(k, :) = examples_sum ./ no_of_examples_in_cluster;
+	
+end;
 
 
 
