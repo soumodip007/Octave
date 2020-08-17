@@ -20,7 +20,23 @@ idx = zeros(size(X,1), 1);
 %
 % Note: You can use a for-loop over the examples to compute this.
 %
+for i = 1:length(idx);
+	% initialise the lengths vector
+	lengths_to_centroids = zeros(K, 1);
 
+	% for every centroid, calculate the distance to the example
+	for k=1:K;
+		% distance from example to current centroid
+		lengths_to_centroids(k) = sum((X(i, :) - centroids(k, :)).^2);
+	end;
+
+	% choose the centroid which is closest (min distance)
+	[_, ix] = min(lengths_to_centroids);
+
+	% remember it
+	idx(i) = ix;
+
+end;
 
 
 
